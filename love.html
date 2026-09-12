@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Angelo 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e0f4ff, #87ceeb, #4fb4e0, #2a9fd6);
+    background-size: 600% 600%;
+    animation: gradientMove 15s ease infinite;
+    overflow: hidden;
+    position: relative;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Sparkle particles */
+  .sparkle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: sparkle linear infinite;
+  }
+
+  @keyframes sparkle {
+    0% { opacity: 0; transform: scale(0); }
+    25% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.5); }
+    75% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(0); }
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 28px;
+    padding: 45px 35px 35px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow:
+      0 25px 60px rgba(0, 80, 140, 0.25),
+      0 0 40px rgba(135, 206, 235, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    position: relative;
+    z-index: 2;
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.5) translateY(30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .photo-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .photo-wrapper img {
+    width: 180px;
+    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 80, 140, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .photo-wrapper img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 80, 140, 0.4);
+  }
+
+  .bubble {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #1a8fc4, #2ab0e6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 6px 20px rgba(26, 143, 196, 0.4);
+    animation: bubblePulse 2s ease-in-out infinite;
+    transition: background 0.5s ease, transform 0.3s ease;
+  }
+
+  @keyframes bubblePulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.03); }
+  }
+
+  .bubble-arrow {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #1a8fc4;
+  }
+
+  .bubble.sad {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    animation: bubbleShake 0.5s ease;
+  }
+
+  .bubble.sad .bubble-arrow {
+    border-top-color: #e74c3c;
+  }
+
+  @keyframes bubbleShake {
+    0%, 100% { transform: translateX(-50%) rotate(0); }
+    20% { transform: translateX(-50%) rotate(-3deg); }
+    40% { transform: translateX(-50%) rotate(3deg); }
+    60% { transform: translateX(-50%) rotate(-2deg); }
+    80% { transform: translateX(-50%) rotate(2deg); }
+  }
+
+  h1 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 80, 140, 0.3);
+    letter-spacing: 0.5px;
+  }
+
+  .subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    font-weight: 400;
+  }
+
+  .buttons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-height: 80px;
+  }
+
+  button {
+    border: none;
+    border-radius: 50px;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  #yesBtn {
+    background: linear-gradient(135deg, #1a8fc4, #2ab0e6);
+    color: white;
+    box-shadow: 0 8px 25px rgba(26, 143, 196, 0.5);
+    position: relative;
+    z-index: 3;
+    animation: yesPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes yesPulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(26, 143, 196, 0.5); }
+    50% { box-shadow: 0 8px 35px rgba(26, 143, 196, 0.7), 0 0 15px rgba(42, 176, 230, 0.3); }
+  }
+
+  #yesBtn:hover {
+    background: linear-gradient(135deg, #1278a8, #1a8fc4);
+    transform: scale(1.05);
+  }
+
+  #yesBtn:active {
+    transform: scale(0.97);
+  }
+
+  #noBtn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 3;
+    transition: top 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), left 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  #noBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  #noBtn.roaming {
+    position: fixed;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .message {
+    margin-top: 25px;
+    font-size: 1.15rem;
+    color: white;
+    font-weight: 700;
+    min-height: 24px;
+    text-shadow: 0 2px 10px rgba(0, 80, 140, 0.3);
+    animation: fadeInUp 0.5s ease;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -50px;
+    opacity: 0.5;
+    animation: floatUp linear infinite;
+    filter: drop-shadow(0 0 6px rgba(135, 206, 235, 0.4));
+    transition: all 0.5s ease;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.5; }
+    50% { transform: translateY(-55vh) rotate(180deg) scale(1.1); opacity: 0.6; }
+    100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
+  }
+
+  /* Confetti burst on Yes */
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 10;
+    animation: confettiFall 3s ease-out forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="card">
+  <div class="photo-wrapper">
+    <img id="photo" src="please.png" alt="Please">
+    <div class="bubble" id="bubble">
+      <span id="bubbleText">💬 Do you love me mahal?</span>
+      <div class="bubble-arrow" id="bubbleArrow"></div>
+    </div>
+  </div>
+  <h1>Hello Angelo!</h1>
+  <p class="subtitle">Tap your answer below</p>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="sayYes()">Yes! 💙</button>
+    <button id="noBtn" onclick="moveNo()">Hinde</button>
+  </div>
+
+  <div class="message" id="message"></div>
+</div>
+
+<script>
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
+  const message = document.getElementById('message');
+  const bubble = document.getElementById('bubble');
+  const bubbleText = document.getElementById('bubbleText');
+  const bubbleArrow = document.getElementById('bubbleArrow');
+  const photo = document.getElementById('photo');
+
+  let scale = 1;
+  const noPhrases = [
+    "Hinde", "Ayoko nga", "Hinde kita love", "Sure ka?", "Talaga ha?",
+    "Sige ba?", "Ayaw mo?", "Last chance!", "Pretty please?", "Come on 🥺"
+  ];
+  const bubblePhrases = [
+    "💬 Do you love me mahal?",
+    "😢 Ayoko nga daw...",
+    "💔 Hinde kita love daw...",
+    "😭 Bakit naman ganon?",
+    "💔 Masakit naman yun...",
+    "🥺 Please naman mahal!",
+    "💔 Nasasaktan na ako...",
+    "😭 Mahal na mahal kita eh!",
+    "💔 Ayaw mo na talaga?",
+    "😭 Sige na please mahal!"
+  ];
+  let noCount = 0;
+
+  function moveNo() {
+    if (!noBtn.classList.contains('roaming')) {
+      noBtn.classList.add('roaming');
+    }
+
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+    const maxX = window.innerWidth - btnWidth - 20;
+    const maxY = window.innerHeight - btnHeight - 20;
+
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
+
+    noBtn.style.left = newX + 'px';
+    noBtn.style.top = newY + 'px';
+
+    noCount++;
+    noBtn.textContent = noPhrases[Math.min(noCount, noPhrases.length - 1)];
+
+    scale += 0.18;
+    yesBtn.style.transform = `scale(${scale})`;
+
+    // Change photo on No taps
+    if (noCount === 1) {
+      photo.src = '1.png';
+    } else if (noCount >= 2) {
+      photo.src = '2.png';
+    }
+
+    // Update bubble text and make it sad
+    bubbleText.textContent = bubblePhrases[Math.min(noCount, bubblePhrases.length - 1)];
+    if (noCount >= 2) {
+      bubble.classList.add('sad');
+    }
+    // Re-trigger shake animation
+    bubble.style.animation = 'none';
+    bubble.offsetHeight;
+    bubble.style.animation = 'bubbleShake 0.5s ease';
+
+    // Change floating hearts to broken hearts after 2nd tap
+    if (noCount >= 2) {
+      document.querySelectorAll('.heart').forEach(h => {
+        h.innerHTML = '💔';
+        h.style.filter = 'drop-shadow(0 0 6px rgba(231, 76, 60, 0.4))';
+      });
+    }
+  }
+
+  function sayYes() {
+    message.innerHTML = "Yay! 💙 I love you too, Angelo! 🥰✨";
+    noBtn.style.display = 'none';
+    yesBtn.style.display = 'none';
+
+    // Change photo to happy
+    photo.src = '3.png';
+
+    // Update bubble to happy
+    bubble.classList.remove('sad');
+    bubble.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+    bubbleArrow.style.borderTopColor = '#27ae60';
+    bubbleText.textContent = "🥰 I knew it! Love you!";
+    bubble.style.animation = 'bubblePulse 1s ease-in-out infinite';
+
+    // Restore hearts
+    document.querySelectorAll('.heart').forEach(h => {
+      h.innerHTML = '💙';
+      h.style.filter = 'drop-shadow(0 0 6px rgba(135, 206, 235, 0.4))';
+    });
+
+    // Confetti burst
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const colors = ['#1a8fc4', '#2ab0e6', '#87ceeb', '#fff', '#f1c40f', '#e74c3c', '#2ecc71'];
+    for (let i = 0; i < 60; i++) {
+      const conf = document.createElement('div');
+      conf.classList.add('confetti');
+      conf.style.left = Math.random() * 100 + 'vw';
+      conf.style.top = '-10px';
+      conf.style.background = colors[Math.floor(Math.random() * colors.length)];
+      conf.style.width = (Math.random() * 8 + 5) + 'px';
+      conf.style.height = (Math.random() * 8 + 5) + 'px';
+      conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      conf.style.animationDelay = (Math.random() * 1) + 's';
+      conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 4000);
+    }
+  }
+
+  // Floating hearts
+  const heartsContainer = document.getElementById('hearts');
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '💙';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+    heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+    heart.style.animationDelay = (Math.random() * 5) + 's';
+    heartsContainer.appendChild(heart);
+  }
+
+  // Sparkle particles
+  for (let i = 0; i < 30; i++) {
+    const s = document.createElement('div');
+    s.classList.add('sparkle');
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    s.style.animationDelay = (Math.random() * 3) + 's';
+    s.style.width = s.style.height = (Math.random() * 4 + 2) + 'px';
+    document.body.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
