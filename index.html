@@ -212,6 +212,12 @@
     transform: scale(0.97);
   }
 
+  #yesBtn.roaming {
+    position: fixed;
+    z-index: 9999;
+    box-shadow: 0 8px 25px rgba(26, 143, 196, 0.5);
+  }
+
   #noBtn {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
@@ -334,14 +340,14 @@
   <div class="photo-wrapper">
     <img id="photo" src="please.png" alt="Please">
     <div class="bubble" id="bubble">
-      <span id="bubbleText">💬 Do you love me mahal?</span>
+      <span id="bubbleText">💬 Mahal mo ko!</span>
       <div class="bubble-arrow" id="bubbleArrow"></div>
     </div>
   </div>
-  <h1>Hello Angelo!</h1>
+  <h1 id="title">Hello Angelo!</h1>
 
   <div class="buttons">
-    <button id="yesBtn" onclick="sayYes()">Yes! 💙</button>
+    <button id="yesBtn" onclick="sayYes()">Oo</button>
     <button id="noBtn" onclick="moveNo()">Hinde</button>
   </div>
 
@@ -363,7 +369,7 @@
     "Sige ba?", "Ayaw mo?", "Last chance!", "Pretty please?", "Come on 🥺"
   ];
   const bubblePhrases = [
-    "💬 Do you love me mahal?",
+    "💬 Mahal mo ko!",
     "😢 Ayoko nga daw...",
     "💔 Hinde kita love daw...",
     "😭 Bakit naman ganon?",
@@ -377,79 +383,72 @@
   let noCount = 0;
 
   function moveNo() {
-    if (!noBtn.classList.contains('roaming')) {
-      noBtn.classList.add('roaming');
-    }
-
-    const btnWidth = noBtn.offsetWidth;
-    const btnHeight = noBtn.offsetHeight;
-    const padding = 15;
-    const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
-    const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    const maxX = vw - btnWidth - padding;
-    const maxY = vh - btnHeight - padding;
-
-    const newX = Math.max(padding, Math.floor(Math.random() * maxX));
-    const newY = Math.max(padding, Math.floor(Math.random() * maxY));
-
-    noBtn.style.left = Math.min(newX, maxX) + 'px';
-    noBtn.style.top = Math.min(newY, maxY) + 'px';
-
-    noCount++;
-    noBtn.textContent = noPhrases[Math.min(noCount, noPhrases.length - 1)];
-
-    scale += 0.18;
-    yesBtn.style.transform = `scale(${scale})`;
-
-    // Change photo on No taps
-    if (noCount === 1) {
-      photo.src = '1.png';
-    } else if (noCount >= 2) {
-      photo.src = '2.png';
-    }
-
-    // Update bubble text and make it sad
-    bubbleText.textContent = bubblePhrases[Math.min(noCount, bubblePhrases.length - 1)];
-    if (noCount >= 2) {
-      bubble.classList.add('sad');
-    }
-    // Re-trigger shake animation
+    // Change to sad rejection theme
+    photo.src = '2.png';
+    bubbleText.textContent = "💔 Alam ko naman...";
+    bubble.classList.add('sad');
     bubble.style.animation = 'none';
     bubble.offsetHeight;
     bubble.style.animation = 'bubbleShake 0.5s ease';
 
-    // Change floating hearts to broken hearts after 2nd tap
-    if (noCount >= 2) {
-      document.querySelectorAll('.heart').forEach(h => {
-        h.innerHTML = '💔';
-        h.style.filter = 'drop-shadow(0 0 6px rgba(231, 76, 60, 0.4))';
-      });
-    }
-  }
-
-  function sayYes() {
-    message.innerHTML = "Yay! 💙 I love you too, Angelo! 🥰✨<br>Chat me I love you hehe";
+    // Hide both buttons
     noBtn.style.display = 'none';
     yesBtn.style.display = 'none';
 
-    // Change photo to happy
-    photo.src = '3.png';
+    // Change background to sad/dark theme
+    document.body.style.background = 'linear-gradient(135deg, #2c3e50, #4a4a4a, #1a1a2e, #34495e)';
+    document.body.style.backgroundSize = '600% 600%';
+    document.body.style.animation = 'gradientMove 15s ease infinite';
 
-    // Update bubble to happy
-    bubble.classList.remove('sad');
-    bubble.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-    bubbleArrow.style.borderTopColor = '#27ae60';
-    bubbleText.textContent = "🥰 I knew it! Love you!";
-    bubble.style.animation = 'bubblePulse 1s ease-in-out infinite';
+    // Change card to darker feel
+    document.querySelector('.card').style.background = 'rgba(0, 0, 0, 0.3)';
+    document.querySelector('.card').style.borderColor = 'rgba(255, 255, 255, 0.1)';
 
-    // Restore hearts
+    // Change all hearts to broken
     document.querySelectorAll('.heart').forEach(h => {
-      h.innerHTML = '💙';
-      h.style.filter = 'drop-shadow(0 0 6px rgba(135, 206, 235, 0.4))';
+      h.innerHTML = '💔';
+      h.style.filter = 'drop-shadow(0 0 6px rgba(231, 76, 60, 0.4))';
     });
 
-    // Confetti burst
-    launchConfetti();
+    // Change title
+    document.getElementById('title').textContent = "I hate you";
+
+    // Sad message
+    message.innerHTML = "😢💔";
+  }
+
+  let yesCount = 0;
+
+  function sayYes() {
+    // Get button size before switching to fixed
+    const rect = yesBtn.getBoundingClientRect();
+    const btnW = rect.width || 80;
+    const btnH = rect.height || 45;
+
+    if (!yesBtn.classList.contains('roaming')) {
+      yesBtn.classList.add('roaming');
+      yesBtn.style.animation = 'none';
+      // Set initial size so it doesn't collapse
+      yesBtn.style.minWidth = btnW + 'px';
+      yesBtn.style.minHeight = btnH + 'px';
+    }
+
+    const padding = 30;
+    const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+    const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+    // Keep fully inside viewport
+    const maxX = vw - btnW - padding;
+    const maxY = vh - btnH - padding;
+
+    const newX = padding + Math.floor(Math.random() * Math.max(maxX - padding, 1));
+    const newY = padding + Math.floor(Math.random() * Math.max(maxY - padding, 1));
+
+    yesBtn.style.left = newX + 'px';
+    yesBtn.style.top = newY + 'px';
+
+    yesCount++;
+
   }
 
   function launchConfetti() {
